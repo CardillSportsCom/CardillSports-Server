@@ -40,7 +40,7 @@
                         <h3 class="ui dividing header">Comments</h3>
                         
                         <div class="comment content" *ngFor="let comment of article.Comments;">
-                            <b>{{comment.Name}}</b>
+                            <b class="comment-text">{{comment.Name}}</b>
                             <div class="metadata">
                                 <span class="date" >{{stringAsDate(comment.Date) | date:'MMM dd, yyyy HH:mm'}}</span>
                             </div>

@@ -69,10 +69,13 @@ main {
 	padding-top: 0px;
 }
 
-b {
+.comment-text {
 	color: #000000;
 }
 
+.footer {
+	margin-top: 1em;
+}
 
 .test {
 	color: red;
