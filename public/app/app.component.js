@@ -21,7 +21,7 @@ var AppComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'app-container',
-            template: "\n    <navigation></navigation>\n    <router-outlet></router-outlet>\n    <footer style=\"margin-top:1em\"></footer>\n  ",
+            template: "\n    <navigation></navigation>\n    <router-outlet></router-outlet>\n    <footer></footer>\n  ",
             directives: [router_1.ROUTER_DIRECTIVES, navigation_component_1.NavigationComponent, footer_component_1.FooterComponent],
             providers: [app_providers_1.APP_PROVIDERS],
             precompile: [home_component_1.HomeComponent, navigation_component_1.NavigationComponent]

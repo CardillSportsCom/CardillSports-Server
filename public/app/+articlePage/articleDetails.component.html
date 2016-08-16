@@ -5,7 +5,7 @@
                 <div class="article-header">
                     <h1>{{article.Name}}</h1>
                     
-                    <p>{{article.Owner.firstName}} {{article.Owner.lastName}} | Contributor</p>        
+                    <p>{{article.AuthorID}} | Contributor</p>        
                 </div> 
             </header>
     </div>
@@ -13,13 +13,14 @@
     <div class="article-content ui segment container inverted ">
         <article>
             <div class="ui inverted very padded segment">
-                 <div *ngFor="let item of article.ArticleItems;">
-                    <div class="ui inverted segment" *ngIf="item.Type == 'Text'">                                            
+                 <div *ngIf="article.Body">
+                    <div class="ui inverted segment">                                            
                         
-                        <p class="post-text" [innerHTML]="item.Paragraph"></p>
+                            {{article.Body}}
+                        
                     </div>
 
-                    <div *ngIf="item.Type == 'SoundCloud'">
+                    <div *ngIf="article.Type == 'SoundCloud'">
                        
                         <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/272651007&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
                        
