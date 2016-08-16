@@ -5,15 +5,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
-    ID: Number,
     Name: String,
-    ImamgeLink: String,
-    DateCreated: Date,
-    Owner: Object,
+    ImageID: String,
+    AuthorID: String,
+    Body: String,
     Rating: Number,
     TotalRatings: Number,
     Comments: []
-});
+}, {timestamps: true});
+
 var ArticleModel = mongoose.model('Article', ArticleSchema);
 
 var CreatorSchema = new Schema ({
@@ -30,6 +30,28 @@ router.get('/content', function(req, res, next) {
             res.json(articles);
     });
 });
+
+router.route('/article').post(function(req, res) {
+        
+        var article = new ArticleModel();      // create a new instance of the Bear model
+        
+        article.Body = req.body.fields.body["en-US"];
+        article.Name = req.body.fields.title["en-US"];
+        article.AuthorID = req.body.fields.author["en-US"][0].sys.id;
+        article.ImageID = req.body.fields.featuredImage["en-US"].sys.id;
+        article.Rating = 0;
+        article.TotalRatings = 0;
+
+        // save the article and check for errors
+        article.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json("req.body");
+        });
+        
+    });
+
 
 router.get('/articles', function(req, res, next) {
     ArticleModel.find({"Type": "Article"}).sort({DateCreated: 'descending'}).exec(
