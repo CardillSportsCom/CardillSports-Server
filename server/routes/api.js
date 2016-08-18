@@ -1,13 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var contentful = require('contentful');
+var showdown  = require('showdown');
+var converter = new showdown.Converter();
 
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
     Name: String,
-    ImageID: String,
-    AuthorID: String,
+    Image: String,
+    Creator: Object,
     Body: String,
     Rating: Number,
     TotalRatings: Number,
@@ -17,11 +20,15 @@ var ArticleSchema = new Schema({
 var ArticleModel = mongoose.model('Article', ArticleSchema);
 
 var CreatorSchema = new Schema ({
-    firstName: String,
-    lastName: String,
+    name: String,
     userPicture: String
 });
 var CreatorModel = mongoose.model('Creator', CreatorSchema);
+
+var client = contentful.createClient({
+  space: 'tkvbbi8oo5wg',
+  accessToken: 'bd37d91aa4c406c96d2d870e4556314f7c2ece4600c590cdafb7007bbdeba2e6'
+})
 
 router.get('/content', function(req, res, next) {
     ArticleModel.find({}).sort({DateCreated: 'descending'}).exec(
@@ -32,13 +39,23 @@ router.get('/content', function(req, res, next) {
 });
 
 router.route('/article').post(function(req, res) {
-        
-        var article = new ArticleModel();      // create a new instance of the Bear model
-        
-        article.Body = req.body.fields.body["en-US"];
-        article.Name = req.body.fields.title["en-US"];
-        article.AuthorID = req.body.fields.author["en-US"][0].sys.id;
-        article.ImageID = req.body.fields.featuredImage["en-US"].sys.id;
+    
+    articleId = req.body.sys.id;
+
+    client.getEntries({
+            'sys.id': articleId
+    })
+    .then(function (entries) {
+       
+        var creator = new CreatorModel();
+        creator.name = entries.items[0].fields.author[0].fields.name;
+        creator.userPicture = entries.items[0].fields.author[0].fields.profilePhoto.fields.file.url;
+       
+        var article = new ArticleModel();        
+        article.Name = entries.items[0].fields.title;
+        article.Body = converter.makeHtml(entries.items[0].fields.body);
+        article.Creator = creator;
+        article.Image = entries.items[0].fields.featuredImage.fields.file.url;
         article.Rating = 0;
         article.TotalRatings = 0;
 
@@ -47,10 +64,10 @@ router.route('/article').post(function(req, res) {
             if (err)
                 res.send(err);
 
-            res.json("req.body");
-        });
-        
+            res.json(article);
+        });        
     });
+});
 
 
 router.get('/articles', function(req, res, next) {

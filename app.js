@@ -7,9 +7,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request');
-
+var showdown = require('showdown');
 var routes = require('./server/routes/index');
 var api = require('./server/routes/api');
+var contentful = require('contentful');
 
 var app = express();
 
