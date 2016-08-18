@@ -1,9 +1,9 @@
 export interface IArticleData {
     ID: number;
     Name: string;
-    ImageLink: string;
-    Owner: ICreator;
-    ArticleItems: IArticleItem[];
+    Image: string;
+    Creator: ICreator;
+    Body: IArticleItem[];
     Comments: IComment[];
     Rating: number;
 }

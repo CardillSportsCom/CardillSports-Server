@@ -102,12 +102,10 @@ export class DataService {
         }
     }
 
-    getHomePageArticles(limit: number) : Observable<IArticleData[]> {
-        console.log("VITH");
+    getHomePageArticles(limit: number) : Observable<IArticleData[]> {    
         if (!this.homeArticles) {
             return this.http.get(this._baseUrl + 'api/home-content/' + limit)
-                        .map((res: Response) => {
-                            console.log("VITH2");
+                        .map((res: Response) => {                            
                             this.homeArticles = res.json();                        
                             return this.homeArticles;
                         })

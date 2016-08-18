@@ -5,7 +5,7 @@
                 <div class="article-header">
                     <h1>{{article.Name}}</h1>
                     
-                    <p>{{article.AuthorID}} | Contributor</p>        
+                    <p>{{article.Creator.name}} | Contributor</p>        
                 </div> 
             </header>
     </div>
@@ -15,9 +15,7 @@
             <div class="ui inverted very padded segment">
                  <div *ngIf="article.Body">
                     <div class="ui inverted segment">                                            
-                        
-                            {{article.Body}}
-                        
+                        <p class="post-text" [innerHTML]="article.Body"></p>                    
                     </div>
 
                     <div *ngIf="article.Type == 'SoundCloud'">

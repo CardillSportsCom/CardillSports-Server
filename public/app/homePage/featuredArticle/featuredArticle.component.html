@@ -4,8 +4,8 @@
     <div class="ui raised center aligned very padded text container basic segment">
         <div class="transparent">
             <h1>{{article.Name}}</h1>    
-            <img class="img-responsive featured-author-img circular " src="https://s3.amazonaws.com/cardillsports/{{article.Owner.userPicture}}">
-            <h4>{{article.Owner.firstName | uppercase }} {{article.Owner.lastName | uppercase}}</h4>
+            <img class="img-responsive featured-author-img circular " src="{{article.Creator.userPicture}}">
+            <h4>{{article.Creator.name | uppercase }}</h4>
             <a [routerLink]="['/article',article._id.toString()]">
                 <button class="ui teal button">Read More</button>
             </a>

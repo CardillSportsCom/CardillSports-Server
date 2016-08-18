@@ -24,11 +24,10 @@ var HomeComponent = (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log("VITH3");
         this.dataService.getHomePageArticles(this.numberOfArticles)
             .subscribe(function (articles) {
             _this.featuredArticle = articles[0];
-            _this.bannerImage = _this.sanitizer.bypassSecurityTrustStyle("url('https://s3.amazonaws.com/cardillsports/" + _this.featuredArticle.ImageLink);
+            _this.bannerImage = _this.sanitizer.bypassSecurityTrustStyle("url('https://" + _this.featuredArticle.Image);
             _this.articles = articles.slice(1);
         });
     };

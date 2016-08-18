@@ -6,12 +6,17 @@
             <div *ngIf="article.Description" class="ui basic segment">
                 <h4>{{ article.Description }} </h4>
             </div>
-            <div *ngIf="!article.Description" class="ui basic segment">
+            <div *ngIf="!article.Description && !article.Body" class="ui basic segment">
                 <h4>{{article.ArticleItems[0].Paragraph | truncate : 500 }} </h4>                
-            </div>    
+                                
+            </div>
+            <div *ngIf="article.Body" class="ui basic segment">
+                <h4>{{article.Body | truncate : 500 }} </h4>                                 
+            </div>
+                
         </div>
         </a>
     </div>
     </div>
-    <img src="https://s3.amazonaws.com/cardillsports/{{article.ImageLink}}">
+    <img src="{{article.Image}}">
 </div>

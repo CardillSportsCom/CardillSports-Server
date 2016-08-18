@@ -32,7 +32,7 @@ export class ArticleDetailsComponent implements OnInit {
         //TODO: chain observables
         this.dataService.getArticle(this.id).subscribe((article: IArticleData) => {
           this.article = article;
-          this.articleImage = this.sanitizer.bypassSecurityTrustStyle("url('https://s3.amazonaws.com/cardillsports/" + this.article.ImageLink);
+          this.articleImage = this.sanitizer.bypassSecurityTrustStyle("url('https:" + this.article.Image);
           this.articleRating = Math.round(article.Rating); 
         });
       });

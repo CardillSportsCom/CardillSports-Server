@@ -30,7 +30,7 @@ var ArticleDetailsComponent = (function () {
             //TODO: chain observables
             _this.dataService.getArticle(_this.id).subscribe(function (article) {
                 _this.article = article;
-                _this.articleImage = _this.sanitizer.bypassSecurityTrustStyle("url('https://s3.amazonaws.com/cardillsports/" + _this.article.ImageLink);
+                _this.articleImage = _this.sanitizer.bypassSecurityTrustStyle("url('https:" + _this.article.Image);
                 _this.articleRating = Math.round(article.Rating);
             });
         });

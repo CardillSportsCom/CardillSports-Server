@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var contentful = require('contentful');
 var showdown  = require('showdown');
+var Promise = require('bluebird');
 var converter = new showdown.Converter();
 
 var Schema = mongoose.Schema;
@@ -41,31 +42,37 @@ router.get('/content', function(req, res, next) {
 router.route('/article').post(function(req, res) {
     
     articleId = req.body.sys.id;
-
-    client.getEntries({
-            'sys.id': articleId
-    })
-    .then(function (entries) {
-       
+    console.log(articleId);
+    Promise.try(function(){
+        return client.getEntries({'sys.id': articleId});
+    }).then(function (entries) {   
+             
+        var entry = entries.items[0].fields;    
+        
         var creator = new CreatorModel();
-        creator.name = entries.items[0].fields.author[0].fields.name;
-        creator.userPicture = entries.items[0].fields.author[0].fields.profilePhoto.fields.file.url;
+        creator.name = entry.author[0].fields.name;
+        creator.userPicture = entry.author[0].fields.profilePhoto.fields.file.url;
        
         var article = new ArticleModel();        
-        article.Name = entries.items[0].fields.title;
-        article.Body = converter.makeHtml(entries.items[0].fields.body);
-        article.Creator = creator;
-        article.Image = entries.items[0].fields.featuredImage.fields.file.url;
+        article.Name = entry.title;
+        article.Body = converter.makeHtml(entry.body);
+        article.Creator = creator; 
+        article.Image = entry.featuredImage.fields.file.url;
+        
         article.Rating = 0;
         article.TotalRatings = 0;
 
+        
+
         // save the article and check for errors
-        article.save(function(err) {
+        return article.save(function(err) {
             if (err)
                 res.send(err);
-
+            
             res.json(article);
-        });        
+        });  
+    }).catch(function(err){
+        console.log(err);
     });
 });
 

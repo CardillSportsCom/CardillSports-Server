@@ -11,6 +11,7 @@ var showdown = require('showdown');
 var routes = require('./server/routes/index');
 var api = require('./server/routes/api');
 var contentful = require('contentful');
+var Promise = require('bluebird');
 
 var app = express();
 

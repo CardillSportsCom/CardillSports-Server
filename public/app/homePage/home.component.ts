@@ -26,12 +26,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private dataService: DataService, private sanitizer: DomSanitizationService) { }
   
-  ngOnInit() {
-    console.log("VITH3");
+  ngOnInit() {    
     this.dataService.getHomePageArticles(this.numberOfArticles)
       .subscribe((articles: IArticleData[]) => {
         this.featuredArticle = articles[0];
-        this.bannerImage = this.sanitizer.bypassSecurityTrustStyle("url('https://s3.amazonaws.com/cardillsports/" + this.featuredArticle.ImageLink);
+        this.bannerImage = this.sanitizer.bypassSecurityTrustStyle("url('https://" + this.featuredArticle.Image);
         this.articles = articles.slice(1);
       });
   }

@@ -57,7 +57,6 @@ var ArticlesPageComponent = (function () {
                 ;
                 return match;
             });
-            console.log(filtered.length + "LENGTH");
             this.filteredArticles = filtered;
         }
         else {
