@@ -32,7 +32,7 @@ var client = contentful.createClient({
 })
 
 router.get('/content', function(req, res, next) {
-    ArticleModel.find({}).sort({DateCreated: 'descending'}).exec(
+    ArticleModel.find({}).sort({createdAt: 'descending'}).exec(
         function(err, articles){
             if(err){ return next(err); }
             res.json(articles);
@@ -78,7 +78,7 @@ router.route('/article').post(function(req, res) {
 
 
 router.get('/articles', function(req, res, next) {
-    ArticleModel.find({"Type": "Article"}).sort({DateCreated: 'descending'}).exec(
+    ArticleModel.find({"Type": "Article"}).sort({createdAt: 'descending'}).exec(
         function(err, articles){
             if(err){ return next(err); }
             res.json(articles);
@@ -86,7 +86,7 @@ router.get('/articles', function(req, res, next) {
 });
 
 router.get('/podcasts', function(req, res, next) {
-    ArticleModel.find({"Type": "Podcast"}).sort({DateCreated: 'descending'}).exec(
+    ArticleModel.find({"Type": "Podcast"}).sort({createdAt: 'descending'}).exec(
         function(err, articles){
             if(err){ return next(err); }
             res.json(articles);
@@ -109,7 +109,7 @@ router.get('/creators', function(req, res, next) {
 
 router.get('/home-content/:limit', function(req, res, next) {
     var limit = req.params.limit;
-    ArticleModel.find({}).sort({DateCreated: 'descending'}).limit(limit).exec(
+    ArticleModel.find({}).sort({createdAt: 'descending'}).limit(limit).exec(
         function(err, articles){
             if(err){ return next(err); }
             res.json(articles);
