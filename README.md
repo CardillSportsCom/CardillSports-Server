@@ -10,10 +10,6 @@ You can install and setup mongodb locally to use a local instance of the databse
 
 Used with node.js. Express is already included in the project repo as a node_module, you shouldn't have to install it yourself.
 
-#### Angular2 -Front-end web framework
-
-Angular2 is provided through node_modules. No extra installation should be necessary.
-
 #### Node.js - Server-side framework
 
 You will need to download and install node.js to develop this web application. Visit [Node.js](https://nodejs.org/en/) and follow the installation instructions.
@@ -33,8 +29,6 @@ You will need to download and install node.js to develop this web application. V
 bin (not sure what this is for)
 
 node_modules (contains all the third-party modules that we depend on)
-
-public (contains all front-end logic)
 
 server (contains all back-end logic)
 

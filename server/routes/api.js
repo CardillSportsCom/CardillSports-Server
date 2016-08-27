@@ -62,8 +62,6 @@ router.route('/article').post(function(req, res) {
         article.Rating = 0;
         article.TotalRatings = 0;
 
-        
-
         // save the article and check for errors
         return article.save(function(err) {
             if (err)
