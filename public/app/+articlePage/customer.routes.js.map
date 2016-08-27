@@ -1,1 +1,0 @@
-{"version":3,"file":"customer.routes.js","sourceRoot":"","sources":["customer.routes.ts"],"names":[],"mappings":";AAEA,mCAAoC,sBAAsB,CAAC,CAAA;AAC3D,yCAAwC,4BAA4B,CAAC,CAAA;AAGxD,sBAAc,GAAiB;IAC1C;QACE,IAAI,EAAE,cAAc;QACpB,SAAS,EAAE,sCAAiB;QAC5B,QAAQ,EAAE;YACR,EAAE,IAAI,EAAC,SAAS,EAAE,SAAS,EAAE,kDAAuB,EAAE;SACvD;KACF;CACF,CAAC"}
