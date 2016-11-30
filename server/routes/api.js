@@ -106,7 +106,7 @@ router.get('/creators', function(req, res, next) {
 });
 
 router.get('/home-content/:limit', function(req, res, next) {
-    var limit = req.params.limit;
+    var limit = parseInt(req.params.limit);
     ArticleModel.find({}).sort({createdAt: 'descending'}).limit(limit).exec(
         function(err, articles){
             if(err){ return next(err); }
